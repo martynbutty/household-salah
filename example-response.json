@@ -1,0 +1,32 @@
+{
+  "status": "success",
+  "data": {
+    "salah": [
+      {
+        "date": "Wednesday, Feb 14, 2024",
+        "hijri_date": "4, 1445",
+        "hijri_month": "Shaban",
+        "day": "Wednesday",
+        "fajr": "5:49AM",
+        "sunrise": "7:32AM",
+        "zuhr": "12:29PM",
+        "asr": "3:25PM",
+        "maghrib": "5:22PM",
+        "isha": "6:55PM"
+      }
+    ],
+    "iqamah": [
+      {
+        "date": "Wednesday, Feb 14, 2024",
+        "fajr": "6:45AM",
+        "zuhr": "12:45PM",
+        "asr": "4:00PM",
+        "maghrib": "5:22PM",
+        "isha": "7:30PM",
+        "jummah1": "12:45 PM",
+        "jummah2": "-"
+      }
+    ]
+  },
+  "message": []
+}
