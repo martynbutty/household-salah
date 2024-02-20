@@ -37,7 +37,8 @@ public class DaySalahJamaatDeserializer extends StdDeserializer<DaySalahJamaatTi
         String maghrib = (iqamahNode.get("maghrib").asText());
         String isha = (iqamahNode.get("isha").asText());
         String jummah1 = (iqamahNode.get("jummah1").asText());
+        String jummah2 = (iqamahNode.get("jummah2").asText());
 
-        return new DaySalahJamaatTimes(date, fajr, zuhr,asr, maghrib, isha, jummah1);
+        return new DaySalahJamaatTimes(date, fajr, zuhr,asr, maghrib, isha, jummah1, jummah2);
     }
 }

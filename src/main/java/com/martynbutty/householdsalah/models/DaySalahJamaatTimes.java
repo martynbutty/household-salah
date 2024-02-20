@@ -20,8 +20,10 @@ public class DaySalahJamaatTimes {
     String maghrib;
     String isha;
     String jummah1;
+    String jummah2;
 
-    public DaySalahJamaatTimes(String date, String fajr, String zuhr,String asr, String maghrib, String isha, String jummah1) {
+    public DaySalahJamaatTimes(String date, String fajr, String zuhr,String asr, String maghrib, String isha,
+                               String jummah1, String jummah2) {
         setSalahDate(date);
         setFajr(fajr);
         setZuhr(zuhr);
@@ -29,5 +31,6 @@ public class DaySalahJamaatTimes {
         setMaghrib(maghrib);
         setIsha(isha);
         setJummah1(jummah1);
+        setJummah2(jummah2);
     }
 }
