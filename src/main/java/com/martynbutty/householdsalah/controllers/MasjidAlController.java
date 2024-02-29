@@ -4,30 +4,36 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.martynbutty.householdsalah.models.DaySalahJamaatTimes;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 public class MasjidAlController {
-    private RestTemplate restTemplate;
 
     private HttpHeaders headers;
 
     public MasjidAlController() throws JsonProcessingException {
-//        WebClient client = WebClient.builder()
-//                .baseUrl("https://masjidal.com/api/v1/time/range?masjid_id=OMA5QnAr")
-//                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-//                .build();
+        // Create a WebClient using its `create` factory method. Set base URL so can use relative URLS later
+        WebClient client = WebClient.create("https://masjidal.com/api/v1");
+        Mono<String> webClientJsonMono = client.get()
+                .uri("/time/range?masjid_id=OMA5QnAr")
+                .retrieve()
+                .bodyToMono(String.class);
 
-        this.restTemplate = new RestTemplate();
+        webClientJsonMono.subscribe(resp -> {
+            try {
+                this.readJsonResponse(resp);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
-        String url = "https://masjidal.com/api/v1/time/range?masjid_id=OMA5QnAr";
-        String responseJson = restTemplate.getForObject(url, String.class);
-
-
-        DaySalahJamaatTimes daySalahJamaatTimes = new ObjectMapper().readValue(responseJson, DaySalahJamaatTimes.class);
+    private void readJsonResponse(String jsonResponse) throws JsonProcessingException {
+        DaySalahJamaatTimes daySalahJamaatTimes = new ObjectMapper().readValue(jsonResponse, DaySalahJamaatTimes.class);
 
         System.out.println("Date of prayer times: " + daySalahJamaatTimes.getSalahDate());
         System.out.println(daySalahJamaatTimes.toString());
-        System.out.println("response JSON : " + responseJson);
+        System.out.println("response JSON : " + jsonResponse);
 
     }
 }
